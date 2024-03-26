@@ -14,9 +14,18 @@ public class ARPlaneIndicator : MonoBehaviour
 
     public GameObject ObjectToSpawn;
 
+
+    public GameObject[] ArrayOfObjects;
+    public Dictionary<string, GameObject> ListOfObjects = new Dictionary<string, GameObject>();
+
     // Start is called before the first frame update
     void Start()
     {
+
+        foreach (var obj in ArrayOfObjects)
+        {
+            ListOfObjects.Add(obj.name, obj);
+        }
         arRaycastManager = GetComponent<ARRaycastManager>(); // input value to arRaycastManager... where that come from?
     }
 
@@ -60,7 +69,11 @@ public class ARPlaneIndicator : MonoBehaviour
         if (Input.touchCount > 0) // whether screen is touched or not
         {
             GameObject obj = Instantiate(ObjectToSpawn, hitPos.position, hitPos.rotation);
-
         }
+    }
+
+    public void SetObjectToSpawn(string ObjectName)
+    {
+        ObjectToSpawn = ListOfObjects[ObjectName];
     }
 }
