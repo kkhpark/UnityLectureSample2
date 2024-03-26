@@ -12,6 +12,8 @@ public class ARPlaneIndicator : MonoBehaviour
     public Camera ARCam;
     public GameObject ARIndicator;
 
+    public GameObject ObjectToSpawn;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,10 +46,21 @@ public class ARPlaneIndicator : MonoBehaviour
 
             ARIndicator.SetActive(true);
             ARIndicator.transform.SetPositionAndRotation(hitPos.position, hitPos.rotation);
+
+            SpawnObject(hitPos);
         }
         else
         {
             ARIndicator.SetActive(false);
+        }
+    }
+
+    private void SpawnObject(Pose hitPos)
+    {
+        if (Input.touchCount > 0) // whether screen is touched or not
+        {
+            GameObject obj = Instantiate(ObjectToSpawn, hitPos.position, hitPos.rotation);
+
         }
     }
 }

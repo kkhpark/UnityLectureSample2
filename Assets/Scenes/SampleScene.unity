@@ -389,6 +389,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ARCam: {fileID: 1828601341}
   ARIndicator: {fileID: 2039468068}
+  ObjectToSpawn: {fileID: 1611614999499696, guid: cb599253fdcda7142b43d4ec5fafa20b, type: 3}
 --- !u!114 &782628380
 MonoBehaviour:
   m_ObjectHideFlags: 0
