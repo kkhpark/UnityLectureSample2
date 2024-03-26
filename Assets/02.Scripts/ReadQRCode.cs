@@ -38,6 +38,7 @@ public class ReadQRCode : MonoBehaviour
                 if (result != null)
                 {
                     txt.text = result.Text;
+                    QRObjectPlacement.Instance.qrcode = result.Text; // put the value to the singleton.
                 }
 
             }
