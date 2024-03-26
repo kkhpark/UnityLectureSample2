@@ -4,7 +4,19 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/01.Scenes/Menu.unity
+    guid: 75830f38c2a620c47893e87376d8c485
+  - enabled: 1
+    path: Assets/01.Scenes/ImageTracking.unity
+    guid: f004ec01fe478df4f98dcc5bc35f0ffc
+  - enabled: 1
+    path: Assets/01.Scenes/PlaneDetection.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/01.Scenes/QRReader.unity
+    guid: e45f080546e60f34dbbb6be6bd28ef32
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 819341bc4902b7a4c8eab8e90d6c5d9e, type: 2}
     com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 1762764780056cb40ae850bf1549de3b, type: 2}
