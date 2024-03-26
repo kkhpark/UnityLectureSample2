@@ -228,6 +228,7 @@ GameObject:
   - component: {fileID: 1237413615}
   - component: {fileID: 1237413614}
   - component: {fileID: 1237413616}
+  - component: {fileID: 1237413617}
   m_Layer: 0
   m_Name: XR Origin
   m_TagString: Untagged
@@ -282,7 +283,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SerializedLibrary: {fileID: 11400000, guid: 3a92cf29783846940a8f0fa8daa07192, type: 2}
   m_MaxNumberOfMovingImages: 0
-  m_TrackedImagePrefab: {fileID: 1325493072995980, guid: d0c61241794147447b59ed8923c30d04, type: 3}
+  m_TrackedImagePrefab: {fileID: 0}
+--- !u!114 &1237413617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1237413613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb3ddde618fba7b48938e53723b1530d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectsToSpawn:
+  - {fileID: 1325493072995980, guid: d0c61241794147447b59ed8923c30d04, type: 3}
+  - {fileID: 1733709892646452, guid: 35957db99d54d8146aae895b277a100a, type: 3}
+  - {fileID: 1348865151911922, guid: 8d00acb5c15e910479aeccdc0eaf1eb3, type: 3}
 --- !u!1 &1494266799
 GameObject:
   m_ObjectHideFlags: 0
@@ -538,8 +555,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4966719baa26e4b0e8231a24d9bd491a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FocusMode: 1
-  m_LightEstimationMode: 0
+  m_FocusMode: -1
+  m_LightEstimationMode: -1
   m_AutoFocus: 1
   m_LightEstimation: 0
   m_FacingDirection: 1
