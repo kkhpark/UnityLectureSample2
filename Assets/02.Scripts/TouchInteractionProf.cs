@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TouchInteractionProf : MonoBehaviour
@@ -7,6 +5,8 @@ public class TouchInteractionProf : MonoBehaviour
     private GameObject Obj;
 
     //Object move
+    private Vector3 MovePos, Offset;
+    bool isDrag;
 
     //Object Rotate
     public float DragScale = 1.1f;
@@ -20,7 +20,7 @@ public class TouchInteractionProf : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("touchCnt: " + Input.touchCount);
+        Debug.Log("touchCount : " + Input.touchCount);
         if (Input.touchCount == 1)
         {
             Touch touch = Input.GetTouch(0);
@@ -33,6 +33,15 @@ public class TouchInteractionProf : MonoBehaviour
                 isTouched = true;
             }
 
+            if (touch.phase == TouchPhase.Began)
+            {
+                MovePos = new Vector3(touch.position.x, touch.position.y,
+                Obj.transform.position.z - Camera.main.transform.position.z);
+                Offset = Obj.transform.position - Camera.main.ScreenToWorldPoint(MovePos);
+                isDrag = true;
+            }
+
+
             //Enter Rotate Mode
             if (touch.phase == TouchPhase.Stationary)
             {
@@ -44,6 +53,7 @@ public class TouchInteractionProf : MonoBehaviour
                     }
                     touchTime = touchTimeLimit;
                     isRotated = true;
+                    isDrag = false;
                 }
                 else
                 {
@@ -62,6 +72,14 @@ public class TouchInteractionProf : MonoBehaviour
                         -touch.deltaPosition.x * Mathf.Deg2Rad * 20, 0), Space.World);
                     }
                 }
+                //move
+                else if (isDrag)
+                {
+                    MovePos = new Vector3(touch.position.x, touch.position.y,
+                    Obj.transform.position.z - Camera.main.transform.position.z);
+                    MovePos = Camera.main.ScreenToWorldPoint(MovePos);
+                    Obj.transform.position = MovePos + Offset;
+                }
             }
 
             if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
@@ -76,6 +94,7 @@ public class TouchInteractionProf : MonoBehaviour
                         Obj.transform.localScale /= DragScale;
                     }
                     Obj = null;
+                    isDrag = false;
                 }
             }
         }
@@ -92,7 +111,6 @@ public class TouchInteractionProf : MonoBehaviour
             float touchDelta = (touch0.position - touch1.position).magnitude;
 
             float zoomDelta = prevTouchDelta - touchDelta;
-            zoomDelta *= -0.01f;
 
             Ray ray = Camera.main.ScreenPointToRay(touch0.position);
             RaycastHit hit;
@@ -100,9 +118,9 @@ public class TouchInteractionProf : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 Obj = hit.transform.gameObject;
-                Obj.transform.localScale = new Vector3(Obj.transform.localScale.x + zoomDelta,
-                Obj.transform.localScale.y + zoomDelta,
-                Obj.transform.localScale.z + zoomDelta);
+                Obj.transform.localScale = new Vector3(Obj.transform.localScale.x + zoomDelta * -0.01f,
+                Obj.transform.localScale.y + zoomDelta * -0.01f,
+                Obj.transform.localScale.z + zoomDelta * -0.01f);
             }
         }
     }
