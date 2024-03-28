@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class TouchInteraction : MonoBehaviour
@@ -32,11 +29,11 @@ public class TouchInteraction : MonoBehaviour
                 Obj = hit.transform.gameObject;
                 isTouched = true;
             }
-            
+
             //Enter Rotate Mode
-            if(touch.phase == TouchPhase.Stationary)
+            if (touch.phase == TouchPhase.Stationary)
             {
-                if(touchTime >= touchTimeLimit)
+                if (touchTime >= touchTimeLimit)
                 {
                     if (!isRotated)
                     {
@@ -85,8 +82,38 @@ public class TouchInteraction : MonoBehaviour
                     }
                     Obj = null;
                 }
+
+            }
+
+
+
+
+        }
+
+        else if (Input.touchCount == 2)
+        {
+            Touch touch0 = Input.GetTouch(0);
+            Touch touch1 = Input.GetTouch(1);
+
+            Vector2 touch0PrevPos = touch0.position - touch0.deltaPosition; //android 에도 deltaPosition이 저장이 되어 있으면 편리할듯..
+            Vector2 touch1PrevPos = touch1.position - touch1.deltaPosition;
+
+            float prevTouchDelta = (touch0PrevPos - touch1PrevPos).magnitude; //magnitude..? 크기라는데
+            float touchDelta = (touch0.position - touch1.position).magnitude;
+
+            float zoomDelta = prevTouchDelta - touchDelta; //+면 줄인것, -면 늘린것
+
+            Ray ray = Camera.main.ScreenPointToRay(touch0.position);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                Obj = hit.transform.gameObject;
+                Obj.transform.localScale = new Vector3(
+                    Obj.transform.localScale.x + zoomDelta,
+                    Obj.transform.localScale.y + zoomDelta,
+                    Obj.transform.localScale.z);
             }
         }
-        
+
     }
 }
